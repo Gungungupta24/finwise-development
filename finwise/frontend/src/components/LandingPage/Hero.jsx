@@ -64,7 +64,6 @@ export default function Hero() {
        
 
         <div className="min-w-0 w-full">
-          {/* Badge */}
 
           <div className="mb-6 inline-flex max-w-full items-center rounded-full border border-border bg-secondary/40 px-3 py-1.5">
             <span className="truncate text-xs font-medium text-muted-foreground">
@@ -72,7 +71,6 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Heading */}
 
           <h1
             className="
@@ -91,7 +89,6 @@ export default function Hero() {
             Your Personal AI Finance Manager That Understands Your Spending.
           </h1>
 
-          {/* Description */}
 
           <p
             className="
@@ -181,7 +178,6 @@ export default function Hero() {
         >
           <div className="w-full rounded-2xl border border-border bg-secondary/40 p-2 shadow-lift">
             <div className="w-full min-w-0 rounded-xl border border-border bg-background p-3">
-              {/* Dashboard Header */}
 
               <div className="mb-2.5 flex min-w-0 items-center justify-between gap-3">
                 <div className="min-w-0">
@@ -201,7 +197,6 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Dashboard Content */}
 
               <div className="min-w-0 space-y-2">
                 <StatStrip />

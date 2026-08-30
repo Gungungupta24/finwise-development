@@ -69,9 +69,6 @@ export function Footercols() {
     >
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
-
-          {/* Brand */}
-
           <div className="lg:col-span-2">
             <Link
               to="/"
@@ -91,8 +88,6 @@ export function Footercols() {
               not chores.
             </p>
 
-            {/* Social Links */}
-
             <div className="mt-5 flex gap-2">
               <a
                 href="#"
@@ -111,8 +106,6 @@ export function Footercols() {
               </a>
             </div>
           </div>
-
-          {/* Footer Columns */}
 
           {footerColumns.map((column) => (
             <div key={column.title}>
@@ -135,8 +128,6 @@ export function Footercols() {
             </div>
           ))}
         </div>
-
-        {/* Copyright */}
 
         <div className="mt-12 border-t border-border pt-6">
           <p className="text-xs text-muted-foreground">
