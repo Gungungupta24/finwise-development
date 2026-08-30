@@ -139,4 +139,6 @@ async function getWeeklyAnalysis(userId) {
   };
 }
 
+
+
 module.exports = { getWeeklyAnalysis };

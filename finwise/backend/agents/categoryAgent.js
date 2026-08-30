@@ -10,6 +10,10 @@ async function categorizeTransaction(transaction, userId) {
     return { category: rule.category, confidence: 'high' };
   }
 
+
+
+  
+
   if (knownMerchants[payee]) {
     return { category: knownMerchants[payee], confidence: 'high' };
   }
