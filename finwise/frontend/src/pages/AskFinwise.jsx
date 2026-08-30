@@ -31,9 +31,6 @@ export default function AskFinwise() {
   const chatContainerRef = useRef(null);
   const inputRef = useRef(null);
 
-  /*
-   * Check whether the user has transactions.
-   */
   useEffect(() => {
     const loadTransactions = async () => {
       try {
@@ -57,9 +54,6 @@ export default function AskFinwise() {
     loadTransactions();
   }, []);
 
-  /*
-   * Keep the chat scrolled to the latest message.
-   */
   useEffect(() => {
     const container = chatContainerRef.current;
 
@@ -68,9 +62,6 @@ export default function AskFinwise() {
     }
   }, [messages, asking]);
 
-  /*
-   * Ask Finwise.
-   */
   const askQuestion = async (questionText = question) => {
     const trimmedQuestion = questionText.trim();
 
@@ -125,9 +116,6 @@ export default function AskFinwise() {
     }
   };
 
-  /*
-   * Clear conversation.
-   */
   const clearChat = () => {
     if (asking) return;
 
@@ -139,9 +127,6 @@ export default function AskFinwise() {
     }, 0);
   };
 
-  /*
-   * Loading state.
-   */
   if (loading) {
     return (
       <div className="min-h-full bg-background">
@@ -181,10 +166,6 @@ export default function AskFinwise() {
       />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        {/* ================================
-            CHAT
-        ================================= */}
-
         <div
   className="
     flex h-[600px] max-h-[calc(100vh-180px)]
@@ -194,7 +175,6 @@ export default function AskFinwise() {
     lg:col-span-2 lg:self-start
   "
 >
-          {/* CHAT HEADER */}
           <div className="flex shrink-0 items-center justify-between border-b border-border px-5 py-4">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary">
@@ -217,7 +197,6 @@ export default function AskFinwise() {
             </span>
           </div>
 
-          {/* CHAT AREA */}
           <div
             ref={chatContainerRef}
             className="min-h-0 flex-1 overflow-y-auto px-4 py-5 sm:px-6"
@@ -309,7 +288,7 @@ export default function AskFinwise() {
                   );
                 })}
 
-                {/* THINKING */}
+
                 {asking && (
                   <div className="flex items-end gap-2">
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-secondary">
@@ -331,7 +310,6 @@ export default function AskFinwise() {
             )}
           </div>
 
-          {/* INPUT */}
           <div className="shrink-0 border-t border-border p-4 sm:p-5">
             <div className="flex items-center gap-2 rounded-full border border-border bg-background p-1.5 focus-within:border-primary">
               <input
@@ -375,10 +353,6 @@ export default function AskFinwise() {
           </div>
         </div>
 
-        {/* ================================
-            SUGGESTIONS
-        ================================= */}
-
         <div className="space-y-4">
           <div className="rounded-2xl border border-border bg-card p-5">
             <div className="flex items-center gap-2">
@@ -412,7 +386,6 @@ export default function AskFinwise() {
             </div>
           </div>
 
-          {/* HOW IT WORKS */}
           <div className="rounded-2xl border border-border bg-card p-5">
             <h2 className="text-sm font-semibold">
               How Ask Finwise works

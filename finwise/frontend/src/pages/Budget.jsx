@@ -114,11 +114,6 @@ export default function Budget() {
 
   return (
     <div className="min-h-full bg-background">
-
-      {/* =========================================
-          HEADER
-      ========================================= */}
-
       <PageHeader
         title="Budget"
         subtitle="Understand your spending and plan your monthly budget"
@@ -153,13 +148,7 @@ export default function Budget() {
         </div>
       ) : (
         <>
-          {/* =========================================
-              SUMMARY CARDS
-          ========================================= */}
-
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-
-            {/* Actual spending */}
             <div className="rounded-2xl border border-border bg-card p-5">
               <div className="flex items-start justify-between">
                 <div>
@@ -182,7 +171,6 @@ export default function Budget() {
               </p>
             </div>
 
-            {/* Suggested budget */}
             <div className="rounded-2xl border border-border bg-card p-5">
               <div className="flex items-start justify-between">
                 <div>
@@ -205,7 +193,6 @@ export default function Budget() {
               </p>
             </div>
 
-            {/* Potential savings */}
             <div className="rounded-2xl border border-border bg-card p-5">
               <div className="flex items-start justify-between">
                 <div>
@@ -228,7 +215,6 @@ export default function Budget() {
               </p>
             </div>
 
-            {/* Over budget */}
             <div className="rounded-2xl border border-border bg-card p-5">
               <div className="flex items-start justify-between">
                 <div>
@@ -253,10 +239,6 @@ export default function Budget() {
               </p>
             </div>
           </div>
-
-          {/* =========================================
-              BUDGET OVERVIEW
-          ========================================= */}
 
           <div className="mt-6 rounded-2xl border border-border bg-card p-5">
             <div className="flex items-start justify-between gap-4">
@@ -352,9 +334,7 @@ export default function Budget() {
             </div>
           </div>
 
-          {/* =========================================
-              CATEGORY BUDGETS
-          ========================================= */}
+     
 
           <div className="mt-6">
             <div>
@@ -440,9 +420,7 @@ export default function Budget() {
             </div>
           </div>
 
-          {/* =========================================
-              ESSENTIAL VS DISCRETIONARY
-          ========================================= */}
+     
 
           <div className="mt-6">
             <div>
@@ -456,8 +434,6 @@ export default function Budget() {
             </div>
 
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-              {/* Essential */}
               <div className="rounded-2xl border border-border bg-card p-5">
                 <div className="flex items-center justify-between">
                   <div>
@@ -502,7 +478,6 @@ export default function Budget() {
                 </p>
               </div>
 
-              {/* Discretionary */}
               <div className="rounded-2xl border border-border bg-card p-5">
                 <div className="flex items-center justify-between">
                   <div>
@@ -549,10 +524,6 @@ export default function Budget() {
             </div>
           </div>
 
-          {/* =========================================
-              EXISTING SAVINGS
-          ========================================= */}
-
           {budget?.existingSavings && (
             <div className="mt-6 rounded-2xl border border-border bg-card p-5">
               <div className="flex items-start gap-3">
@@ -598,10 +569,6 @@ export default function Budget() {
               </div>
             </div>
           )}
-
-          {/* =========================================
-              EXPLANATION
-          ========================================= */}
 
           <div className="mt-6 rounded-2xl border border-border bg-card p-5">
             <div className="flex items-start gap-3">
