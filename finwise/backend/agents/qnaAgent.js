@@ -94,6 +94,7 @@ async function answerQuestion(userId, question) {
     if (secondResponse.error) {
       console.error('Gemini API error (second call):', JSON.stringify(secondResponse.error));
       return {
+        
        answer: describeToolResult(name, toolResult),
         toolUsed: name,
         rawData: toolResult

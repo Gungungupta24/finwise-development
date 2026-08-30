@@ -52,6 +52,7 @@ async function generateBudget(userId, monthlyIncome) {
     existingSavings: {
       total: totalMovedToSavings,
       transactionCount: savingsTxns.length,
+      
       message: totalMovedToSavings > 0
         ? `You're already setting aside ₹${totalMovedToSavings} via RD/FD this month - keep it up!`
         : null
