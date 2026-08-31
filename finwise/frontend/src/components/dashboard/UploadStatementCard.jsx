@@ -31,7 +31,6 @@ export default function UploadStatementCard({
 
   return (
     <div className="rounded-2xl border border-border bg-card p-4 sm:p-5">
-      {/* DROP AREA */}
       <div
         onClick={() => !uploading && inputRef.current?.click()}
         onDragOver={(e) => e.preventDefault()}
@@ -89,7 +88,6 @@ export default function UploadStatementCard({
         />
       </div>
 
-      {/* BOTTOM */}
       <div className="mt-4 flex flex-col gap-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-2">
           <ShieldCheck className="h-4 w-4 text-primary" />

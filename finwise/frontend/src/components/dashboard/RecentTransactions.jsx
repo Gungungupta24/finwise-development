@@ -22,7 +22,6 @@ export default function RecentTransactions({
 }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-5">
-      {/* HEADER */}
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-sm font-semibold">
@@ -60,7 +59,6 @@ export default function RecentTransactions({
         </div>
       ) : (
         <>
-          {/* TRANSACTIONS */}
           <div className="mt-4 divide-y divide-border">
             {transactions.slice(0, 5).map((transaction) => {
               const isCredit = transaction.type === "CR";
@@ -70,7 +68,6 @@ export default function RecentTransactions({
                   key={transaction._id}
                   className="group flex items-center gap-3 py-3"
                 >
-                  {/* ICON */}
                   <div
                     className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
                       isCredit
@@ -85,7 +82,6 @@ export default function RecentTransactions({
                     )}
                   </div>
 
-                  {/* DETAILS */}
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium">
                       {transaction.payee}
@@ -104,7 +100,6 @@ export default function RecentTransactions({
                     </div>
                   </div>
 
-                  {/* AMOUNT + CATEGORY ACTION */}
                   <div className="flex shrink-0 items-center gap-3">
                     <p
                       className={`text-sm font-semibold tabular-nums ${
@@ -131,7 +126,6 @@ export default function RecentTransactions({
             })}
           </div>
 
-          {/* MOBILE CATEGORY ACTION */}
           <div className="mt-3 flex justify-end sm:hidden">
             <Link
               to="/dashboard/transactions"

@@ -9,10 +9,8 @@ export default function AskFinwiseWidget({
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Reference to ONLY the chat scrolling area
   const chatContainerRef = useRef(null);
 
-  // Scroll only inside the chat box
   useEffect(() => {
     const container = chatContainerRef.current;
 
@@ -71,8 +69,6 @@ export default function AskFinwiseWidget({
 
   return (
     <div className="flex h-[476px] min-h-[430px] flex-col overflow-hidden rounded-2xl border border-border bg-card p-5">
-      
-      {/* HEADER */}
       <div className="flex shrink-0 items-center justify-between">
         <h2 className="text-sm font-semibold">
           Ask Finwise
@@ -83,7 +79,6 @@ export default function AskFinwiseWidget({
         </span>
       </div>
 
-      {/* CHAT AREA */}
       <div
         ref={chatContainerRef}
         className="mt-4 min-h-0 flex-1 overflow-y-auto pr-1"
@@ -152,7 +147,6 @@ export default function AskFinwiseWidget({
               );
             })}
 
-            {/* LOADING */}
             {loading && (
               <div className="flex items-end gap-2">
                 <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary">
@@ -174,7 +168,6 @@ export default function AskFinwiseWidget({
         )}
       </div>
 
-      {/* INPUT */}
       <div className="mt-4 flex shrink-0 items-center gap-2">
         <input
           value={question}
