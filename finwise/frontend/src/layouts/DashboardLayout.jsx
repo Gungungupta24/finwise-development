@@ -9,15 +9,11 @@ export default function DashboardLayout() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      {/* Fixed sidebar */}
       <Sidebar
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
       />
-
-      {/* Dashboard area */}
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-        {/* Mobile header */}
         <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-background px-4 lg:hidden">
           <div className="flex items-center gap-3">
             <button
@@ -43,7 +39,6 @@ export default function DashboardLayout() {
           <ThemeToggle />
         </header>
 
-        {/* ONLY this area scrolls */}
         <main className="min-h-0 flex-1 overflow-y-auto">
           <div className="mx-auto w-full max-w-[1400px] p-4 sm:p-6 lg:p-7">
             <Outlet />

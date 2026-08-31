@@ -24,16 +24,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public */}
         <Route path="/" element={<LandingPage />} />
 
-        {/* Guest Only */}
+        /* Guest Only routes */
         <Route element={<GuestRoute />}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Route>
 
-        {/* Protected */}
+        /* Protected Routes*/
         <Route element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />

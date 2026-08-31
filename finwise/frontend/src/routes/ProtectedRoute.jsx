@@ -3,8 +3,6 @@ import useAuth from "../hooks/useAuth";
 
 export default function ProtectedRoute() {
   const { isAuthenticated, loading } = useAuth();
-
-  // Prevent rendering until auth state is restored
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center bg-[#FAFAFC]">
