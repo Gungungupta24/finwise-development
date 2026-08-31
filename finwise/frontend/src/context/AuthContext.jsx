@@ -6,7 +6,7 @@ export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // true while restoring session
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     if (!tokenStorage.exists()) {

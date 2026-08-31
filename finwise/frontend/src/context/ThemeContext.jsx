@@ -39,14 +39,12 @@ export function ThemeProvider({ children }) {
     }),
     [theme]
   );
-
   return (
     <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );
 }
-
 export function useThemeContext() {
   const context = useContext(ThemeContext);
 
