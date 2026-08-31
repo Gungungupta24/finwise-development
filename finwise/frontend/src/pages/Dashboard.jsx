@@ -36,9 +36,6 @@ export default function Dashboard() {
 
   const headerInputRef = useRef(null);
 
-  /*
-   * Load all dashboard data from backend
-   */
   const loadData = useCallback(async () => {
     setLoading(true);
 
@@ -59,18 +56,12 @@ export default function Dashboard() {
     }
   }, []);
 
-  /*
-   * Load dashboard when page opens
-   */
   useEffect(() => {
     loadData();
   }, [loadData]);
 
   const hasTransactions = transactions.length > 0;
 
-  /*
-   * Validate uploaded file
-   */
   const validateFile = (file) => {
     if (!file) return false;
 
@@ -93,9 +84,6 @@ export default function Dashboard() {
     return true;
   };
 
-  /*
-   * Upload statement to backend
-   */
   const handleUpload = async (file) => {
     if (!file || !validateFile(file)) return;
 
@@ -104,10 +92,6 @@ export default function Dashboard() {
 
       await transactionAPI.upload(file);
 
-      /*
-       * After backend processes the statement,
-       * reload all dashboard data.
-       */
       await loadData();
     } catch (error) {
       console.error("Statement upload failed:", error);
@@ -123,9 +107,6 @@ export default function Dashboard() {
     }
   };
 
-  /*
-   * Header upload button
-   */
   const openHeaderFilePicker = () => {
     if (!uploading) {
       headerInputRef.current?.click();
@@ -136,10 +117,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-full bg-background">
-      {/* =========================================
-          HEADER
-      ========================================= */}
-
       <input
         ref={headerInputRef}
         type="file"
@@ -177,23 +154,14 @@ export default function Dashboard() {
         }
       />
 
-      {/* =========================================
-          FIRST-TIME UPLOAD
-      ========================================= */}
-
       {!hasTransactions && !loading && (
         <div className="mb-6">
           <UploadStatementCard onUpload={handleUpload} uploading={uploading} />
         </div>
       )}
 
-      {/* =========================================
-          BENTO DASHBOARD
-      ========================================= */}
-
       {!loading && (
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          {/* WEEKLY FLOW */}
           <div className="order-1 lg:order-none lg:col-span-2">
             <WeeklyFlowCard
               flow={analysis?.weeklyMoneyFlow}
@@ -215,7 +183,6 @@ export default function Dashboard() {
             />
           </div>
 
-          {/* RECENT TRANSACTIONS */}
           <div className="order-4 lg:order-none lg:col-span-3">
             <RecentTransactions
               transactions={transactions}
@@ -223,16 +190,11 @@ export default function Dashboard() {
             />
           </div>
 
-          {/* ASK FINWISE */}
           <div className="order-5 lg:order-none lg:col-start-3 lg:row-start-1 lg:row-span-2">
             <AskFinwiseWidget hasTransactions={hasTransactions} />
           </div>
         </div>
       )}
-
-      {/* =========================================
-          LOADING
-      ========================================= */}
 
       {loading && (
         <div className="fixed inset-0 pointer-events-none flex items-center justify-center">
