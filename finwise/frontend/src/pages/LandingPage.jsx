@@ -7,16 +7,13 @@ import Footer from '../components/LandingPage/Footer'
 
 const LandingPage = () => {
   return (
-    // <main className="min-h-screen bg-background">
     <>
       <Navbar />
-
       <Hero />
       <Features/>
       <Workflow/>
       <Footer/>
       </>
-    // </main>
   )
 }
 

@@ -18,7 +18,6 @@ const suggestedQuestions = [
   "What are my top spending categories?",
   "How much did I spend on Shopping?",
   "How much did I spend in the last 7 days?",
-  "Which merchant did I spend the most on?",
 ];
 
 export default function AskFinwise() {

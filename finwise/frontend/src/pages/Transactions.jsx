@@ -66,17 +66,13 @@ function ConfidenceBadge({ confidence }) {
         isHigh
           ? "text-success"
           : isLow
-          ? "text-primary"
-          : "text-muted-foreground"
+            ? "text-primary"
+            : "text-muted-foreground"
       }`}
     >
       <span
         className={`h-1.5 w-1.5 rounded-full ${
-          isHigh
-            ? "bg-success"
-            : isLow
-            ? "bg-primary"
-            : "bg-muted-foreground"
+          isHigh ? "bg-success" : isLow ? "bg-primary" : "bg-muted-foreground"
         }`}
       />
 
@@ -104,9 +100,6 @@ export default function Transactions() {
 
   const inputRef = useRef(null);
 
-  /*
-   * Load transactions
-   */
   const loadData = useCallback(async () => {
     setLoading(true);
 
@@ -125,9 +118,6 @@ export default function Transactions() {
     loadData();
   }, [loadData]);
 
-  /*
-   * File validation
-   */
   const validateFile = (file) => {
     if (!file) return false;
 
@@ -150,9 +140,6 @@ export default function Transactions() {
     return true;
   };
 
-  /*
-   * Upload statement
-   */
   const handleUpload = async (file) => {
     if (!file || !validateFile(file)) return;
 
@@ -182,18 +169,12 @@ export default function Transactions() {
     }
   };
 
-  /*
-   * Open category editor
-   */
   const openCategoryEditor = (transaction) => {
     setSelectedTransaction(transaction);
     setSelectedCategory(transaction.category || "Other");
     setSaveAsRule(true);
   };
 
-  /*
-   * Close category editor
-   */
   const closeCategoryEditor = () => {
     if (updatingCategory) return;
 
@@ -202,9 +183,6 @@ export default function Transactions() {
     setSaveAsRule(true);
   };
 
-  /*
-   * Save category
-   */
   const handleCategoryUpdate = async () => {
     if (!selectedTransaction || !selectedCategory) return;
 
@@ -214,7 +192,7 @@ export default function Transactions() {
       await categoryAPI.update(
         selectedTransaction._id,
         selectedCategory,
-        saveAsRule
+        saveAsRule,
       );
 
       await loadData();
@@ -234,9 +212,6 @@ export default function Transactions() {
     }
   };
 
-  /*
-   * Filter transactions
-   */
   const filteredTransactions = transactions.filter((transaction) => {
     const payee = transaction.payee?.toLowerCase() || "";
     const category = transaction.category || "Uncategorized";
@@ -248,27 +223,18 @@ export default function Transactions() {
       categoryFilter === "All" ||
       category.toLowerCase() === categoryFilter.toLowerCase();
 
-    const matchesType =
-      typeFilter === "All" ||
-      transaction.type === typeFilter;
+    const matchesType = typeFilter === "All" || transaction.type === typeFilter;
 
     const matchesConfidence =
-      confidenceFilter === "All" ||
-      confidence === confidenceFilter;
+      confidenceFilter === "All" || confidence === confidenceFilter;
 
-    return (
-      matchesSearch &&
-      matchesCategory &&
-      matchesType &&
-      matchesConfidence
-    );
+    return matchesSearch && matchesCategory && matchesType && matchesConfidence;
   });
 
   const hasTransactions = transactions.length > 0;
 
   return (
     <div className="min-h-full bg-background">
-      {/* Hidden file input */}
       <input
         ref={inputRef}
         type="file"
@@ -286,7 +252,6 @@ export default function Transactions() {
         }}
       />
 
-      {/* Header */}
       <PageHeader
         title="Transactions"
         subtitle={
@@ -310,25 +275,20 @@ export default function Transactions() {
         }
       />
 
-      {/* Loading */}
       {loading ? (
         <div className="flex h-64 items-center justify-center text-sm text-muted-foreground">
           Loading transactions...
         </div>
       ) : !hasTransactions ? (
-        /* Empty state */
         <div className="rounded-2xl border border-border bg-card p-8 text-center">
           <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
             <Upload className="h-4 w-4 text-primary" />
           </div>
 
-          <p className="mt-4 text-sm font-medium">
-            No transactions yet
-          </p>
+          <p className="mt-4 text-sm font-medium">No transactions yet</p>
 
           <p className="mx-auto mt-1 max-w-xs text-xs leading-relaxed text-muted-foreground">
-            Upload a statement to see your categorized transactions
-            here.
+            Upload a statement to see your categorized transactions here.
           </p>
 
           <button
@@ -342,10 +302,8 @@ export default function Transactions() {
         </div>
       ) : (
         <>
-          {/* Filters */}
           <div className="rounded-2xl border border-border bg-card p-4">
             <div className="flex flex-col gap-3">
-              {/* Search */}
               <div className="relative">
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
 
@@ -358,13 +316,10 @@ export default function Transactions() {
                 />
               </div>
 
-              {/* Filters */}
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
                 <select
                   value={categoryFilter}
-                  onChange={(e) =>
-                    setCategoryFilter(e.target.value)
-                  }
+                  onChange={(e) => setCategoryFilter(e.target.value)}
                   className="rounded-xl border border-border bg-background px-3 py-2.5 text-xs outline-none focus:border-primary"
                 >
                   <option value="All">All categories</option>
@@ -378,9 +333,7 @@ export default function Transactions() {
 
                 <select
                   value={typeFilter}
-                  onChange={(e) =>
-                    setTypeFilter(e.target.value)
-                  }
+                  onChange={(e) => setTypeFilter(e.target.value)}
                   className="rounded-xl border border-border bg-background px-3 py-2.5 text-xs outline-none focus:border-primary"
                 >
                   <option value="All">All transactions</option>
@@ -390,9 +343,7 @@ export default function Transactions() {
 
                 <select
                   value={confidenceFilter}
-                  onChange={(e) =>
-                    setConfidenceFilter(e.target.value)
-                  }
+                  onChange={(e) => setConfidenceFilter(e.target.value)}
                   className="rounded-xl border border-border bg-background px-3 py-2.5 text-xs outline-none focus:border-primary"
                 >
                   <option value="All">All confidence</option>
@@ -402,7 +353,6 @@ export default function Transactions() {
                 </select>
               </div>
 
-              {/* Confidence explanation */}
               <div className="relative flex items-center justify-between border-t border-border pt-3">
                 <div className="flex items-center gap-2">
                   <SlidersHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
@@ -414,9 +364,7 @@ export default function Transactions() {
 
                 <button
                   type="button"
-                  onClick={() =>
-                    setShowConfidenceInfo((value) => !value)
-                  }
+                  onClick={() => setShowConfidenceInfo((value) => !value)}
                   className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground hover:text-foreground"
                 >
                   <Info className="h-3.5 w-3.5" />
@@ -432,16 +380,14 @@ export default function Transactions() {
                         </p>
 
                         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                          Confidence shows how reliably Finwise
-                          assigned a category to a transaction.
+                          Confidence shows how reliably Finwise assigned a
+                          category to a transaction.
                         </p>
                       </div>
 
                       <button
                         type="button"
-                        onClick={() =>
-                          setShowConfidenceInfo(false)
-                        }
+                        onClick={() => setShowConfidenceInfo(false)}
                         className="rounded-md p-1 text-muted-foreground hover:bg-secondary"
                       >
                         <X className="h-3.5 w-3.5" />
@@ -453,8 +399,8 @@ export default function Transactions() {
                         <ConfidenceBadge confidence="high" />
 
                         <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
-                          Finwise is highly confident about the
-                          assigned category.
+                          Finwise is highly confident about the assigned
+                          category.
                         </p>
                       </div>
 
@@ -462,8 +408,8 @@ export default function Transactions() {
                         <ConfidenceBadge confidence="low" />
 
                         <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
-                          Finwise used an AI-based prediction.
-                          Review it if it doesn't look right.
+                          Finwise used an AI-based prediction. Review it if it
+                          doesn't look right.
                         </p>
                       </div>
 
@@ -471,8 +417,7 @@ export default function Transactions() {
                         <ConfidenceBadge confidence="none" />
 
                         <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
-                          Finwise could not confidently determine
-                          the category.
+                          Finwise could not confidently determine the category.
                         </p>
                       </div>
                     </div>
@@ -482,11 +427,10 @@ export default function Transactions() {
             </div>
           </div>
 
-          {/* Results count */}
           <div className="mt-4 flex items-center justify-between">
             <p className="text-xs text-muted-foreground">
-              Showing {filteredTransactions.length} of{" "}
-              {transactions.length} transactions
+              Showing {filteredTransactions.length} of {transactions.length}{" "}
+              transactions
             </p>
 
             {(search ||
@@ -508,13 +452,10 @@ export default function Transactions() {
             )}
           </div>
 
-          {/* Transactions */}
           <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card">
             {filteredTransactions.length === 0 ? (
               <div className="p-8 text-center">
-                <p className="text-sm font-medium">
-                  No matching transactions
-                </p>
+                <p className="text-sm font-medium">No matching transactions</p>
 
                 <p className="mt-1 text-xs text-muted-foreground">
                   Try changing your search or filters.
@@ -530,9 +471,7 @@ export default function Transactions() {
                       key={transaction._id}
                       className="p-4 transition-colors hover:bg-secondary/20 sm:px-5"
                     >
-                      {/* Desktop / tablet row */}
                       <div className="flex items-center gap-3">
-                        {/* Transaction icon */}
                         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary">
                           {isCredit ? (
                             <ArrowDownLeft className="h-4 w-4 text-success" />
@@ -541,7 +480,6 @@ export default function Transactions() {
                           )}
                         </div>
 
-                        {/* Main info */}
                         <div className="min-w-0 flex-1">
                           <p className="truncate text-sm font-medium">
                             {transaction.payee}
@@ -549,67 +487,49 @@ export default function Transactions() {
 
                           <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-muted-foreground">
                             <span>
-                              {transaction.category ||
-                                "Uncategorized"}
+                              {transaction.category || "Uncategorized"}
                             </span>
 
                             <span>·</span>
 
-                            <span>
-                              {formatDate(transaction.date)}
-                            </span>
+                            <span>{formatDate(transaction.date)}</span>
 
-                            <span className="hidden sm:inline">
-                              ·
-                            </span>
+                            <span className="hidden sm:inline">·</span>
 
                             <span className="hidden sm:inline-flex">
                               <ConfidenceBadge
-                                confidence={
-                                  transaction.confidence
-                                }
+                                confidence={transaction.confidence}
                               />
                             </span>
                           </div>
                         </div>
 
-                        {/* Amount */}
                         <p
                           className={`shrink-0 text-sm font-semibold tabular-nums ${
-                            isCredit
-                              ? "text-success"
-                              : "text-foreground"
+                            isCredit ? "text-success" : "text-foreground"
                           }`}
                         >
                           {isCredit ? "+" : "-"}₹
-                          {Number(
-                            transaction.amount || 0
-                          ).toLocaleString("en-IN")}
+                          {Number(transaction.amount || 0).toLocaleString(
+                            "en-IN",
+                          )}
                         </p>
 
-                        {/* Change category desktop */}
                         <button
                           type="button"
-                          onClick={() =>
-                            openCategoryEditor(transaction)
-                          }
+                          onClick={() => openCategoryEditor(transaction)}
                           className="hidden shrink-0 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:inline-flex"
                         >
                           Change category
                         </button>
                       </div>
 
-                      {/* Mobile information */}
                       <div className="mt-3 flex items-center justify-between gap-3 pl-12 sm:hidden">
-                        <ConfidenceBadge
-                          confidence={transaction.confidence}
-                        />
+                        <ConfidenceBadge confidence={transaction.confidence} />
 
                         <button
                           type="button"
-                          onClick={() =>
-                            openCategoryEditor(transaction)
-                          }
+                          onClick={() => openCategoryEditor(transaction)}
                           className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                         >
                           Change category
@@ -624,7 +544,6 @@ export default function Transactions() {
         </>
       )}
 
-      {/* Category modal */}
       {selectedTransaction && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
@@ -635,12 +554,9 @@ export default function Transactions() {
           }}
         >
           <div className="w-full max-w-md rounded-2xl border border-border bg-card p-5 shadow-xl">
-            {/* Modal header */}
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-base font-semibold">
-                  Change category
-                </h2>
+                <h2 className="text-base font-semibold">Change category</h2>
 
                 <p className="mt-1 text-xs text-muted-foreground">
                   Update how this transaction is categorized.
@@ -657,7 +573,6 @@ export default function Transactions() {
               </button>
             </div>
 
-            {/* Transaction */}
             <div className="mt-5 rounded-xl bg-secondary/50 p-4">
               <p className="truncate text-sm font-semibold">
                 {selectedTransaction.payee}
@@ -675,28 +590,20 @@ export default function Transactions() {
                       : "text-foreground"
                   }`}
                 >
-                  {selectedTransaction.type === "CR"
-                    ? "+"
-                    : "-"}
-                  ₹
-                  {Number(
-                    selectedTransaction.amount || 0
-                  ).toLocaleString("en-IN")}
+                  {selectedTransaction.type === "CR" ? "+" : "-"}₹
+                  {Number(selectedTransaction.amount || 0).toLocaleString(
+                    "en-IN",
+                  )}
                 </p>
               </div>
             </div>
 
-            {/* Category */}
             <div className="mt-5">
-              <label className="text-sm font-medium">
-                Category
-              </label>
+              <label className="text-sm font-medium">Category</label>
 
               <select
                 value={selectedCategory}
-                onChange={(e) =>
-                  setSelectedCategory(e.target.value)
-                }
+                onChange={(e) => setSelectedCategory(e.target.value)}
                 disabled={updatingCategory}
                 className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary disabled:cursor-not-allowed disabled:opacity-60"
               >
@@ -708,14 +615,11 @@ export default function Transactions() {
               </select>
             </div>
 
-            {/* Remember rule */}
             <label className="mt-5 flex cursor-pointer items-start gap-3 rounded-xl border border-border p-3">
               <input
                 type="checkbox"
                 checked={saveAsRule}
-                onChange={(e) =>
-                  setSaveAsRule(e.target.checked)
-                }
+                onChange={(e) => setSaveAsRule(e.target.checked)}
                 disabled={updatingCategory}
                 className="mt-0.5 h-4 w-4 accent-primary"
               />
@@ -726,34 +630,25 @@ export default function Transactions() {
                 </p>
 
                 <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  Finwise will use this category for future
-                  transactions from this payee.
+                  Finwise will use this category for future transactions from
+                  this payee.
                 </p>
               </div>
             </label>
 
-            {/* Current confidence */}
             <div className="mt-4 rounded-xl bg-secondary/50 p-3">
               <div className="flex items-center justify-between gap-3">
                 <span className="text-xs text-muted-foreground">
                   Current confidence
                 </span>
 
-                <ConfidenceBadge
-                  confidence={
-                    selectedTransaction.confidence
-                  }
-                />
+                <ConfidenceBadge confidence={selectedTransaction.confidence} />
               </div>
 
               <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
-                {getConfidenceDescription(
-                  selectedTransaction.confidence
-                )}
+                {getConfidenceDescription(selectedTransaction.confidence)}
               </p>
             </div>
-
-            {/* Actions */}
             <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
               <button
                 type="button"
@@ -767,16 +662,12 @@ export default function Transactions() {
               <button
                 type="button"
                 onClick={handleCategoryUpdate}
-                disabled={
-                  updatingCategory || !selectedCategory
-                }
+                disabled={updatingCategory || !selectedCategory}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <Check className="h-4 w-4" />
 
-                {updatingCategory
-                  ? "Saving..."
-                  : "Save category"}
+                {updatingCategory ? "Saving..." : "Save category"}
               </button>
             </div>
           </div>
